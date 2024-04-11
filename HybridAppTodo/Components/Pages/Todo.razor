@@ -1,0 +1,50 @@
+﻿@page "/todo"
+@using HybridAppTodo.Data;
+@using HybridAppTodo.Services;
+
+
+@inject TodoService TodoService;
+
+<h3>Todo</h3>
+<ul>
+	@foreach (var todo in TodoItems)
+	{
+		<li>
+			<input @bind="todo.Title"/>
+		</li>
+	}
+</ul>
+
+<input placeholder="type a todo" @bind="newTodo"/>
+<button @onclick="AddTodo">Add</button>
+<button @onclick="Save">Save</button>
+
+@code {
+	List<TodoItem> TodoItems = new List<TodoItem>();
+	string newTodo;
+
+	protected override void OnInitialized()
+	{
+		base.OnInitialized();
+		var items = TodoService.LoadItems();
+		TodoItems.AddRange(items);
+	}
+
+	void Save()
+	{
+		TodoService.SaveItems(TodoItems);
+	}
+
+	void AddTodo()
+	{
+		if (string.IsNullOrWhiteSpace(newTodo))
+			return;
+
+		TodoItems.Add(new TodoItem
+			{
+				Title = newTodo
+			});
+
+		newTodo = string.Empty;
+	}
+}
