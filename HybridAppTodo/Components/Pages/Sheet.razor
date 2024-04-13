@@ -1,0 +1,19 @@
+﻿@page "/sheet"
+
+<table class="table table-bordered">
+	@for (var i = 0; i < 64; i++)
+	{
+		<tr>
+			@for (var j = 0; j < 64; j++)
+			{
+				<td class="border">
+					<input class="border-0"/>
+				</td>
+			}
+		</tr>
+	}
+</table>
+
+@code {
+
+}

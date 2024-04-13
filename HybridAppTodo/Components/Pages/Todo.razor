@@ -20,7 +20,7 @@
 <button @onclick="Save">Save</button>
 
 @code {
-	List<TodoItem> TodoItems = new List<TodoItem>();
+	List<TodoItem> TodoItems = new();
 	string newTodo;
 
 	protected override void OnInitialized()
